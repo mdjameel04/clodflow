@@ -3,11 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useUser,UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string>("#");
+  
+  const {isSignedIn} = useUser()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -69,29 +72,52 @@ export default function Navbar() {
 </ul>
 
         {/* RIGHT ACTIONS */}
-        <div className="hidden md:flex items-center gap-[10px]">
-          {/* Sign In */}
-          <Link
-            href="/sign-in"
-            className="text-[18px] font-medium text-[#8888A8]
-              border border-white/[0.08] px-[18px] py-[7px] rounded-[6px]
-              hover:border-[#C9A84C]/40 hover:text-[#C9A84C]
-              transition-all duration-200"
-          >
-            Sign in
-          </Link>
+         {/* RIGHT ACTIONS */}
+<div className="hidden md:flex items-center gap-[10px]">
+ {!isSignedIn ? (
+  <>
+    <Link
+      href="/sign-in"
+      className="text-[18px] font-medium text-[#8888A8]
+        border border-white/[0.08] px-[18px] py-[7px] rounded-[6px]
+        hover:border-[#C9A84C]/40 hover:text-[#C9A84C]
+        transition-all duration-200"
+    >
+      Sign in
+    </Link>
 
-          {/* CTA */}
-          <Link
-            href="/sign-up"
-            className="text-[15px] font-[800] text-[#070912]
-              bg-[#C9A84C] px-[20px] py-[8px] rounded-[6px]
-              hover:bg-[#D9B85C] hover:shadow-[0_6px_20px_rgba(201,168,76,0.3)]
-              transition-all duration-200 tracking-[0.1px]"
-          >
-            Join waitlist
-          </Link>
-        </div>
+    <Link
+      href="/sign-up"
+      className="text-[15px] font-[800] text-[#070912]
+        bg-[#C9A84C] px-[20px] py-[8px] rounded-[6px]
+        hover:bg-[#D9B85C] hover:shadow-[0_6px_20px_rgba(201,168,76,0.3)]
+        transition-all duration-200 tracking-[0.1px]"
+    >
+      Join waitlist
+    </Link>
+  </>
+) : (
+  <>
+    <Link
+      href="/dashboard"
+      className="text-[15px] font-[700] text-[#070912]
+        bg-[#C9A84C] px-[20px] py-[8px] rounded-[6px]
+        hover:bg-[#D9B85C] hover:shadow-[0_6px_20px_rgba(201,168,76,0.3)]
+        transition-all duration-200 tracking-[0.1px]"
+    >
+      Dashboard
+    </Link>
+
+    <UserButton
+      appearance={{
+        elements: {
+          avatarBox: "w-9 h-9",
+        },
+      }}
+    />
+  </>
+)}
+</div>
 
         {/* MOBILE HAMBURGER */}
         <button
@@ -144,26 +170,50 @@ export default function Navbar() {
   </a>
 ))}
 
-          <div className="flex flex-col gap-3 mt-4 h-auto">
-            <Link
-              href="/sign-in"
-              className="text-[14px] font-medium text-center text-[#8888A8]
-                border border-white/[0.08] px-5 py-3 rounded-[6px]
-                hover:border-[#C9A84C]/40 hover:text-[#C9A84C]
-                transition-all duration-200"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/sign-up"
-              className="text-[14px] font-[800] text-center text-[#070912]
-                bg-[#C9A84C] px-5 py-4 rounded-[6px]
-                hover:bg-[#D9B85C]
-                transition-all duration-200"
-            >
-              Join waitlist
-            </Link>
-          </div>
+         <div className="flex flex-col gap-3 mt-4 h-auto">
+ {!isSignedIn ? (
+  <>
+    <Link
+      href="/sign-in"
+      className="text-[14px] font-medium text-center text-[#8888A8]
+        border border-white/[0.08] px-5 py-3 rounded-[6px]
+        hover:border-[#C9A84C]/40 hover:text-[#C9A84C]
+        transition-all duration-200"
+      onClick={() => setMenuOpen(false)}
+    >
+      Sign in
+    </Link>
+
+    <Link
+      href="/sign-up"
+      className="text-[14px] font-[800] text-center text-[#070912]
+        bg-[#C9A84C] px-5 py-4 rounded-[6px]
+        hover:bg-[#D9B85C]
+        transition-all duration-200"
+      onClick={() => setMenuOpen(false)}
+    >
+      Join waitlist
+    </Link>
+  </>
+) : (
+  <>
+    <Link
+      href="/dashboard"
+      className="text-[14px] font-[700] text-center text-[#070912]
+        bg-[#C9A84C] px-5 py-4 rounded-[6px]
+        hover:bg-[#D9B85C]
+        transition-all duration-200"
+      onClick={() => setMenuOpen(false)}
+    >
+      Dashboard
+    </Link>
+
+    <div className="flex justify-center pt-2">
+      <UserButton />
+    </div>
+  </>
+)}
+</div>
         </div>
       </div>
     </nav>
