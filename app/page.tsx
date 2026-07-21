@@ -1,6 +1,7 @@
 
 import Navbar from "./components/navbar";
 import Hero from "./components/hero/Hero";
+import Ticker from "./components/Ticker";
 
 export default function Home() {
 
@@ -9,6 +10,7 @@ export default function Home() {
       <Navbar />
 
       <Hero/>
+      <Ticker/>
     </div>
   );
 }

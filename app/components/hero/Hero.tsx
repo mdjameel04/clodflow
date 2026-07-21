@@ -4,7 +4,7 @@ import HeroCards from './HeroCards'
 
 const Hero = () => {
   return (
-    <section className='relative min-h-screen w-full flex  px-6 md:px-12 lg:px-20 pt-[150px] pb-[80px] overflow-hidden bg-[#070912] '>
+    <section className='relative min-h-screen w-full flex   px-6 md:px-12 lg:px-20 pt-[150px] pb-[80px] overflow-hidden bg-[#070912] '>
 
   <div className='pointer-events-none absolute top-0 right-0 w-[65%] h-full '
 
