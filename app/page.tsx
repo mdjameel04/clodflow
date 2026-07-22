@@ -6,6 +6,7 @@ import ProofSection from "./components/ProofSection";
 import ThreeSteps from "./components/ThreeSteps";
 import ProductSection from "./components/ProductSection";
 import Features from "./components/Features";
+import Comparison from "./components/Comparison";
 
 export default function Home() {
 
@@ -19,6 +20,7 @@ export default function Home() {
       <ProofSection/>
       <ThreeSteps/>
       <Features/>
+      <Comparison/>
     </div>
   );
 }
