@@ -9,6 +9,7 @@ import Features from "./components/Features";
 import Comparison from "./components/Comparison";
 import Pricing from "./components/Pricing";
 import Faq from "./components/Faq";
+import CTA from "./components/CTA";
 
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
       <Comparison/>
       <Pricing/>
       <Faq/>
+      <CTA/>
     </div>
   );
 }
