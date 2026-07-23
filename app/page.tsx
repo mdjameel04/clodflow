@@ -7,6 +7,9 @@ import ThreeSteps from "./components/ThreeSteps";
 import ProductSection from "./components/ProductSection";
 import Features from "./components/Features";
 import Comparison from "./components/Comparison";
+import Pricing from "./components/Pricing";
+import Faq from "./components/Faq";
+
 
 export default function Home() {
 
@@ -21,6 +24,8 @@ export default function Home() {
       <ThreeSteps/>
       <Features/>
       <Comparison/>
+      <Pricing/>
+      <Faq/>
     </div>
   );
 }

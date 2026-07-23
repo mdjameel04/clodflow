@@ -1,4 +1,11 @@
-import React from 'react'
+"use client"
+
+import { useGSAP } from '@gsap/react'
+import React, { useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger)
 
 
 const Rows = [
@@ -58,11 +65,47 @@ const renderValue= (value:boolean | string) =>{
 
 
 const Comparison = () => {
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(()=>{
+ const ctx = gsap.context(()=>{
+  const tl = gsap.timeline({
+    scrollTrigger:{
+      trigger: sectionRef.current,
+      start: "top 75%",
+      toggleActions: "play none none none"
+    }
+  });
+
+  tl.from(".comparison-tagline", {
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      ease: "power3.out",
+    })
+    .from(".comparsion-heading", {
+          opacity: 0,
+          y: 50,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.3")
+       .from( ".comparison-row",{
+        opacity:0,
+        y:40,
+        stagger:0.12,
+        ease:"power3.out"
+       }, "-=0.2")
+ } , sectionRef)
+
+ return ()=>ctx.revert()
+})
+
   return (
     <section className="bg-[#070912] px-6 md:px-12 py-24">
-        <div className='max-w-[1200px] mx-auto'>
+        <div ref={sectionRef} className='max-w-[1200px] mx-auto'>
  {/* tagline */}
-          <div className='flex items-center gap-2'>
+          <div  className='comparison-tagline flex items-center gap-2'>
 <span className="block w-8 h-[1px] bg-[#e3b127]" />
           <span className="text-[11px] font-bold uppercase tracking-[2.5px] text-[#C9A84C]">
             Comparison
@@ -70,7 +113,7 @@ const Comparison = () => {
           </div>
          
           {/* heading */}
-          <h1 className='text-[44px]  md:text-[52px] font-black leading-[1.05] tracking-[-2px] text-[#F0F0F8] mt-2 mb-16'>  
+          <h1 className='comparsion-heading text-[44px]  md:text-[52px] font-black leading-[1.05] tracking-[-2px] text-[#F0F0F8] mt-2 mb-16'>  
             We do 
            <span className='text-[#cda330]'> More. </span>
            
@@ -128,8 +171,8 @@ const Comparison = () => {
 
        <tbody>
         {Rows.map((row,i)=>(
-          <tr key={i} 
-           className="border-t border-[#1E1E28] group">
+          <tr key={i}  
+           className=" comparison-row border-t border-[#1E1E28] group">
 
 {/* Feature name */}
                   <td className="py-[18px] pr-6">

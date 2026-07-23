@@ -1,13 +1,6 @@
 "use client";
 
-/* ─────────────────────────────────────────
-   ProofSection.tsx
-   "Every email, researched."
 
-   LEFT  → Heading + description
-   RIGHT → Annotated email card with
-           floating gold labels
-───────────────────────────────────────── */
 
 const ANNOTATIONS = [
   { label: "Company name",   top: "8%",  right: "-44%" },
